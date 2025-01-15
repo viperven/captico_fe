@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import CourseDetails from "./pages/CourseDetails";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/courses/:id" element={<CourseDetails />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

@@ -17,17 +17,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    debugger;
     setError("");
     try {
       const response = await loginUser(formData);
       if (response?.isSuccess) {
-        CookieService.setCookie(cookieName, data?.token, cookieExpairy);
-      }
-      else {
+        CookieService.setCookie(cookieName, response?.token, cookieExpairy);
+        navigate("/");
+      } else {
         alert("Invalid credentials " + data?.message);
       }
     } catch (err) {
-      const errorMessage = err.response?.data?.message || "Login failed. Try again.";
+      const errorMessage =
+        err.response?.data?.message || "Login failed. Try again.";
       setError(errorMessage);
     }
   };
@@ -77,7 +79,10 @@ const Login = () => {
           </form>
 
           <p className="text-sm text-center mt-4">
-            Don't have an account? <a href="/register" className="link link-primary">Register here</a>
+            Don't have an account?{" "}
+            <a href="/register" className="link link-primary">
+              Register here
+            </a>
           </p>
         </div>
       </div>

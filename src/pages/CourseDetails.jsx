@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCourseById, buyCourseById } from "../services/ApiService";
+import { AuthService } from "../services/AuthService";
 import courseImg from "../assets/course.jpg";
 
 const CourseDetails = () => {
@@ -27,7 +28,12 @@ const CourseDetails = () => {
   // Handle course purchase
   const handleBuyCourse = async () => {
     try {
-      const response = await buyCourseById(id, course?.price); // Placeholder API call
+      debugger;
+      if (!AuthService.isAuthenticatedUser()) {
+        alert("Please login to purchase the course.");
+        return;
+      }
+      const response = await buyCourseById(id, course?.price);
       if (response?.isSuccess) {
         alert("Course purchased successfully!");
       } else {

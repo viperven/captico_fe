@@ -3,14 +3,12 @@ import { fetchCourses } from "../services/ApiService";
 import Hero from "../components/Hero";
 import CourseCard from "../components/CourseCard";
 
-
 const Home = () => {
   const [courses, setCourses] = useState([]); // Courses data
   const [search, setSearch] = useState(""); // Search input value
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const [totalPages, setTotalPages] = useState(1); // Total number of pages
   const [loading, setLoading] = useState(false); // Loading state
-
 
   //debounce
   // useEffect(() => {
@@ -27,15 +25,15 @@ const Home = () => {
   const loadCourses = async (page = 1, query = "") => {
     try {
       setLoading(true);
-      const res = await fetchCourses(query, page); 
+      const res = await fetchCourses(query, page);
       console.log(res);
-    
+
       const apiData = res?.apiData;
       const pagination = res?.pagination;
 
-      setCourses(apiData || []); 
-      setCurrentPage(pagination?.currentPage || 1); 
-      setTotalPages(pagination?.totalPages || 1); 
+      setCourses(apiData || []);
+      setCurrentPage(pagination?.currentPage || 1);
+      setTotalPages(pagination?.totalPages || 1);
     } catch (error) {
       console.error("Error fetching courses:", error);
     } finally {
@@ -46,10 +44,10 @@ const Home = () => {
   // Debounced search effect
   useEffect(() => {
     const timer = setTimeout(() => {
-      loadCourses(1, search); // Load courses with search query
+      loadCourses(1, search);
     }, 900);
 
-    return () => clearTimeout(timer); // Cleanup debounce timer
+    return () => clearTimeout(timer);
   }, [search]);
 
   // Handle "Next" button click
@@ -65,7 +63,6 @@ const Home = () => {
       loadCourses(currentPage - 1, search);
     }
   };
-
 
   return (
     <div>
@@ -120,6 +117,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-

@@ -32,9 +32,9 @@ export const loginUser = async (data) => {
 };
 
 // Fetch all courses with search
-export const fetchCourses = async (query = "") => {
+export const fetchCourses = async (query = "", page = 1) => {
   const res = await fetch(
-    `${API_BASE_URL}course/getallcourse?search=${query}`,
+    `${API_BASE_URL}course/getallcourse?search=${query}&page=${page}`,
     {
       method: "GET",
       headers: {
