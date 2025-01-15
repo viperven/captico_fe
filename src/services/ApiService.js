@@ -59,3 +59,23 @@ export const fetchCourseById = async (id) => {
     const responseData = await res.json();
     return responseData;
 };
+
+// by course by ID
+export const buyCourseById = async (id, price) => {
+    const bodyData = {
+        courseId: id,
+        priceAtPurchase: price
+    }
+    const res = await fetch(`${API_BASE_URL}course/purchaseCourse`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: AuthService.getApiAuthorizationConfig(),
+        },
+        body: JSON.stringify(bodyData),
+        credentials: "include",
+    });
+    const responseData = await res.json();
+    return responseData;
+};
