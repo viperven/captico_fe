@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCourseById, buyCourseById } from "../services/ApiService";
-import courseImg from "../assets/course.jpg"
+import courseImg from "../assets/course.jpg";
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -27,11 +27,11 @@ const CourseDetails = () => {
   // Handle course purchase
   const handleBuyCourse = async () => {
     try {
-      const response = await buyCourseById(id,course?.price); // Placeholder API call
+      const response = await buyCourseById(id, course?.price); // Placeholder API call
       if (response?.isSuccess) {
         alert("Course purchased successfully!");
       } else {
-        alert("Purchase failed. Please try again.");
+        alert(`Purchase failed :${response?.message} Please try again .`);
       }
     } catch (error) {
       console.error("Error purchasing course:", error.message);
@@ -63,17 +63,15 @@ const CourseDetails = () => {
           <h1 className="text-4xl font-bold mb-4">{course?.title}</h1>
           <p className="text-gray-600 mb-6">{course?.description}</p>
           <p className="text-sm text-gray-500 mb-4">
-            Created by: <span className="font-medium">{course?.createdBy?.name}</span>
+            Created by:{" "}
+            <span className="font-medium">{course?.createdBy?.name}</span>
           </p>
           <p className="text-lg font-semibold mb-6">
             Price: <span className="text-green-500">${course?.price}</span>
           </p>
 
           {/* Buy Now Button */}
-          <button
-            className="btn btn-primary"
-            onClick={handleBuyCourse}
-          >
+          <button className="btn btn-primary" onClick={handleBuyCourse}>
             Buy Now
           </button>
         </div>

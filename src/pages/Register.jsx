@@ -29,7 +29,7 @@ const Register = () => {
           name: "",
           email: "",
           password: "",
-        })
+        });
         navigate("/");
       } else {
         alert(`message : ${data?.message}`);
