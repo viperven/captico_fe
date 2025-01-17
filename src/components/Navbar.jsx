@@ -1,19 +1,45 @@
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useAuth } from "../services/AuthProvider";
+import { useNavigate } from "react-router-dom";
 import { AuthService } from "../services/AuthService";
 
+
 const Navbar = () => {
+  const { isLoggedIn, login, logout } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (AuthService?.isAuthenticatedUser()) {
+      login();
+    }
+    else {
+      logout();
+    }
+  }, [])
 
   return (
-    <div className="navbar bg-base-100">
+    <nav className="navbar bg-base-100 shadow-md px-4">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost normal-case text-xl">CoursePortal</Link>
+        <a className="text-lg font-bold">Course Portal</a>
       </div>
       <div className="flex-none">
-        <Link to="/login" className="btn btn-primary mx-2">Login</Link>
-        <Link to="/register" className="btn btn-secondary mx-2">Register</Link>
-        <Link to="/create-course" className="btn btn-secondary">Sell</Link>
+        {isLoggedIn ? (
+          <>
+            <button className="btn btn-primary" onClick={logout}>
+              Logout
+            </button>
+            <button className="btn btn-accent ml-2" onClick={()=>navigate("/create-course")}>Sell</button>
+          </>
+        ) : (
+          <>
+            <button className="btn btn-secondary mr-2" onClick={() => navigate("/login")}>
+              Login
+            </button>
+            <button className="btn btn-primary" onClick={() => navigate("/register")}>Register</button>
+          </>
+        )}
       </div>
-    </div>
+    </nav>
   );
 };
 

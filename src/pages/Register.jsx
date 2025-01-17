@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { registerUser } from "../services/ApiService";
 import { useNavigate } from "react-router-dom";
 import CookieService from "../services/CookieService";
+import { useAuth } from "../services/AuthProvider";
 const cookieName = "token";
 const cookieExpairy = 1;
 
@@ -17,6 +18,7 @@ const Register = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const { isLoggedIn, login, logout } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +32,7 @@ const Register = () => {
           email: "",
           password: "",
         });
+        login();
         navigate("/");
       } else {
         alert(`message : ${data?.message}`);

@@ -5,11 +5,11 @@ import CourseCard from "../components/CourseCard";
 import { AuthService } from "../services/AuthService";
 
 const Home = () => {
-  const [courses, setCourses] = useState([]); // Courses data
-  const [search, setSearch] = useState(""); // Search input value
-  const [currentPage, setCurrentPage] = useState(1); // Current page
-  const [totalPages, setTotalPages] = useState(1); // Total number of pages
-  const [loading, setLoading] = useState(false); // Loading state
+  const [courses, setCourses] = useState([]); 
+  const [search, setSearch] = useState(""); 
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [totalPages, setTotalPages] = useState(1); 
+  const [loading, setLoading] = useState(false); 
 
   //debounce
   // useEffect(() => {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/ApiService";
 import CookieService from "../services/CookieService";
+import { useAuth } from "../services/AuthProvider";
 const cookieName = "token";
 const cookieExpairy = 1;
 
@@ -9,6 +10,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { isLoggedIn, login, logout } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,12 +19,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    debugger;
     setError("");
     try {
       const response = await loginUser(formData);
       if (response?.isSuccess) {
         CookieService.setCookie(cookieName, response?.token, cookieExpairy);
+        login();
         navigate("/");
       } else {
         alert("Invalid credentials " + data?.message);
@@ -70,6 +72,7 @@ const Login = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
+                autoComplete="true"
               />
             </div>
 
