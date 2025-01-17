@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchCourses } from "../services/ApiService";
 import Hero from "../components/Hero";
 import CourseCard from "../components/CourseCard";
+import { AuthService } from "../services/AuthService";
 
 const Home = () => {
   const [courses, setCourses] = useState([]); // Courses data
@@ -26,8 +27,6 @@ const Home = () => {
     try {
       setLoading(true);
       const res = await fetchCourses(query, page);
-      console.log(res);
-
       const apiData = res?.apiData;
       const pagination = res?.pagination;
 
@@ -63,6 +62,9 @@ const Home = () => {
       loadCourses(currentPage - 1, search);
     }
   };
+
+  console.log(AuthService.isAuthenticatedUser());
+  
 
   return (
     <div>

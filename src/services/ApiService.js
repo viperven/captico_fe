@@ -81,3 +81,20 @@ export const buyCourseById = async (id, price) => {
   const responseData = await res.json();
   return responseData;
 };
+
+
+// create course by 
+export const createCourse = async (formData) => {
+  const res = await fetch(`${API_BASE_URL}course/createCourse`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: AuthService.getApiAuthorizationConfig(),
+    },
+    body: JSON.stringify(formData),
+    credentials: "include",
+  });
+  const responseData = await res.json();
+  return responseData;
+};

@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import CourseDetails from "./pages/CourseDetails";
 import Footer from "./components/Footer";
+import CreateCourse from "./pages/CreateCourse";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/courses/:id" element={<CourseDetails />} />
+        <Route path="/create-course" element={<CreateCourse />} />
       </Routes>
       <Footer />
     </Router>
